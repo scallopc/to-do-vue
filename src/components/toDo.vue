@@ -8,10 +8,15 @@
 import ToDoItem from './toDoItem.vue';
 
 export default {
-  name: 'ToDo',
   components: {
     ToDoItem,
   },
-  props: ['todos'],
+  props: {
+    todos: {
+      type: Array,
+      required: true,
+    },
+  },
+  emits: ['del-todo'], // Declare the event here
 };
 </script>

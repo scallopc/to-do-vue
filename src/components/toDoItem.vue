@@ -1,10 +1,10 @@
 <template>
   <div class="todo-item" :class="{ 'is-complete': todo.completed }">
-    <p>
+    <div class="item">
       <input type="checkbox" @change="markComplete" />
       {{ todo?.title }}
-      <button @click="$emit('del-todo', todo.id)" class="del">x</button>
-    </p>
+    </div>
+    <button @click="delTodo(todo.id)" class="del">x</button>
   </div>
 </template>
 
@@ -16,15 +16,30 @@ export default {
     markComplete() {
       this.todo.completed = !this.todo.completed;
     },
+    delTodo(id) {
+      this.$emit('delTodo', id); // Emissão do evento personalizado
+    },
   },
+  emits: ['del-Todo'], // Declare the event here
 };
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .todo-item {
   background: #f4f4f4;
   padding: 10px;
-  border-bottom: 1px #ccc dotted;
+  border-bottom: 1px #dddddd solid;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  justify-content: space-between;
+  gap: 10px;
+
+  .item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
 }
 
 .is-complete {
